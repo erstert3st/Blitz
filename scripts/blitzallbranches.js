@@ -26,6 +26,7 @@ VSS.require(["VSS/Controls", "VSS/Controls/Grids", "VSS/Controls/Dialogs",
 		gitClient.getRepositories(projCurr).then(function (repositories) {
 			jQuery.each(repositories, function (index, repository) {
 				var id = repository.id;
+				if (repository.isDisabled == true || repository.size == 0) return true; // -> repository is disabled  || repository has no branch/commit 
 				gitClient.getBranches(id,projCurr).then(function(branches){
 					count += branches.length-1;
 					$("#BranchCountSpan").html(count);
